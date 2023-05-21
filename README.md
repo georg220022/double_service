@@ -15,7 +15,7 @@
 {  
     "questions_num": int  
 }  
-![Получить вопросы]([https://github.com/jon/coolproject/raw/master/image/image.png](https://github.com/georg220022/spring_2023/blob/main/%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.png))
+![Получить вопросы](https://github.com/georg220022/spring_2023/blob/main/%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.png)
 
 Креды для подключения извне к БД:  
 адрес: localhost:5433  
