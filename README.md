@@ -12,15 +12,17 @@
    
 Отправить POST запрос на адрес `http://localhost:8000/api/v1/save_new_question`  
 Тело запроса:  
+```
 {  
     "questions_num": int  
-}   
+}  
+```
 Пример:  
 ![Получить вопросы](https://github.com/georg220022/spring_2023/blob/main/%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.png)  
   
 ### Креды для подключения извне к БД сервиса 1:  
-адрес: `localhost:5433`   
-PASSWORD и USER и DB = `gera`  
+- адрес: `localhost:5433`   
+- PASSWORD и USER и DB = `gera`  
   
 # Сервис 2 - Конвертация файлов  
 - Отправка файла на конвертацию требует api ключ, остальные эндпоинты без ключа  
@@ -30,9 +32,11 @@ PASSWORD и USER и DB = `gera`
 `http://localhost:8001/api/v1/registration`  
   
 Тело запроса:  
+```
 {  
     "username": "Ivan"  
 }  
+```
 ![Регистрация](https://github.com/georg220022/spring_2023/blob/main/%D0%A0%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F.png)  
   
 ### Перед отправкой файла на конвертацию добавим API ключ.  
@@ -48,7 +52,7 @@ PASSWORD и USER и DB = `gera`
 Тело должно содержать файл и user_id
 1) Перейти во вкладку Body
 2) У ключа "file" выбрать в выпадающем списке тип File, в значение добавить сам .wav файл
-3) "user_id" это id пользователя полученный при регистрации
+- "user_id" это id пользователя полученный при регистрации
 ![Добавление API ключа](https://github.com/georg220022/spring_2023/blob/main/%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B0%D1%86%D0%B8%D1%8F.png)  
 
 ### Скачивание файла: отправить GET запрос
@@ -56,8 +60,8 @@ PASSWORD и USER и DB = `gera`
 `http://127.0.0.1:8001/download/xxxxxxxxxxxxxxxxxxxxxxxxxxxx.mp3`
 
 ### Креды для подключения извне к БД сервиса 2:  
-адрес: `localhost:5432`   
-PASSWORD и USER и DB = `gera`
+- адрес: `localhost:5432`   
+- PASSWORD и USER и DB = `gera`
 
 ## Доп информация:
 - Повторение запросов сделано через background task инструментом FastApi, а не Celery
