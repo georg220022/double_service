@@ -20,7 +20,7 @@ ITERATIONS = 50000
 
 VALID_FORMAT_UPLOAD = ".wav"
 FORMAT_SONG = "mp3"
-STORAGE_PATH = "../service_2/file_storage/"
+STORAGE_PATH = "service_2/file_storage/"
 MIN_LEN_FILE_NAME = 5
 MAX_LEN_FILE_NAME = 50
 DOWNLOAD_PATH = "http://127.0.0.1:8001/download/{file_name}"

@@ -28,7 +28,7 @@ class FileRepository:
         """
         return f"{str(uuid4())}.{FORMAT_SONG}"
 
-    def convert_to_mp3(self, file: UploadFile):
+    def convert_to_mp3(self, file: UploadFile) -> JSONResponse | str:
         """
         Конвертирует песню из wav -> mp3
         и сохраняет на диск

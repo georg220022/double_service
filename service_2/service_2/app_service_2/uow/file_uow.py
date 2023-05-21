@@ -24,10 +24,12 @@ class FileUow(AbstractUnitOfWork):
             return not_valid_key_response
         if bad_name_response := self.file_repo.validator_old_name(file.filename):
             return bad_name_response
-        file_name = self.file_repo.convert_to_mp3(file)
-        if download_link := await self.file_repo.create_in_db(user_id, file_name):
-            return download_link
-        return JSONResponse(ServerMessages.ERROR_SAVE_FILE_DB, status_code=400)
+        if isinstance(file_name := self.file_repo.convert_to_mp3(file), str):
+            if download_link := await self.file_repo.create_in_db(user_id, file_name):
+                return download_link
+            else:
+                return JSONResponse(ServerMessages.ERROR_SAVE_FILE_DB, status_code=400)
+        return file_name
 
     async def get(self, file_name: str) -> JSONResponse:
         """
