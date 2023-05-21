@@ -1,0 +1,90 @@
+version: '3.9'
+
+services:
+
+  postgres_db_service_1:
+    container_name: postgres_db_service_1
+    image: postgres:15.1-alpine
+    restart:
+      always
+    env_file:
+      .env
+    expose:
+      - 5433
+    ports:
+     - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      timeout: 5s
+      retries: 5
+    networks:
+      - web_service_network_1
+
+
+  web_service_1:
+    container_name: web_service_1
+    build:
+      context: ./
+      target: service_1_builder
+      args:
+        - ENV_FILE=.env
+    command:
+      bash -c "poetry run alembic upgrade head && python3 service_1/run_server.py"
+    restart:
+      always
+    ports:
+      - 8000:8000
+    volumes:
+      - storage_data_1:/app_1/storage
+    depends_on:
+      postgres_db_service_1:
+        condition: service_healthy
+    networks:
+      - web_service_network_1
+
+  postgres_db_service_2:
+    container_name: postgres_db_service_2
+    image: postgres:15.1-alpine
+    restart:
+      always
+    env_file:
+      .env
+    ports:
+     - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      timeout: 5s
+      retries: 5
+    networks:
+      - web_service_network_2
+
+
+  web_service_2:
+    container_name: web_service_2
+    build:
+      context: ./
+      target: service_2_builder
+      args:
+        - ENV_FILE=.env
+    command:
+      bash -c "poetry run alembic upgrade head && python3 service_2/run_server.py"
+    restart:
+      always
+    ports:
+      - 8001:8001
+    volumes:
+      - storage_data_2:/app_2/storage
+    depends_on:
+      postgres_db_service_2:
+        condition: service_healthy
+    networks:
+      - web_service_network_2
+
+
+
+volumes:
+  storage_data_1:
+  storage_data_2:
+networks:
+  web_service_network_1:
+  web_service_network_2:

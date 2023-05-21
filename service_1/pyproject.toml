@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "bewise"
+version = "0.1.0"
+description = "Два сервиса в одном компоузе =)"
+authors = ["georg220022 <lordsmobilegr2019@gmail.com>"]
+license = "Full Free"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.95.1"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+pydantic = "^1.10.7"
+python-dotenv = "^1.0.0"
+sqlalchemy = "^2.0.13"
+asyncpg = "^0.27.0"
+httpx = "^0.24.0"
+alembic = "^1.11.0"
+psycopg2-binary = "^2.9.6"
+python-multipart = "^0.0.6"
+pydub = "^0.25.1"
+pre-commit = "^3.3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,62 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: trailing-whitespace  # убирает лишние пробелы
+        exclude: '^README\.md|alembic/.*|migrations/.*'
+    -   id: end-of-file-fixer  # добавляет пустую строку в конце файла
+    -   id: check-yaml  # проверяет синтаксис .yaml файлов
+    -   id: check-json  # проверяет синтаксис .json файлов
+    -   id: check-case-conflict  # проверяет файлы, которые могут конфликтовать в файловых системах без учета регистра.
+    -   id: check-merge-conflict  # проверяет файлы, содержащие конфликтные строки слияния.
+
+
+# Отсортировывает импорты в проекте
+-   repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        exclude: 'alembic/.*|migrations/.*'
+        types: [python3]
+        args: [ --profile, black, --filter-files ]
+
+# Обновляет синтаксис Python кода в соответствии с последними версиями
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+    -   id: pyupgrade
+        exclude: 'alembic/.*|migrations/.*'
+        args: [--py310-plus]
+
+# Форматирует код под PEP8
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v2.0.1
+    hooks:
+    -   id: autopep8
+        exclude: 'alembic/.*|migrations/.*'
+        args:
+            - --diff
+
+# Сканер стилистических ошибок, нарушающие договоренности PEP8
+-   repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+    -   id: flake8
+        exclude: 'alembic/.*|migrations/.*'
+        args: ["--ignore=F821,W503,W504,E203", "--max-line-length=120" ]
+
+# Проверка статических типов с помощью mypy
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.991
+    hooks:
+    -   id: mypy
+        args: [--no-strict-optional, --ignore-missing-imports]
+        exclude: 'alembic/.*|migrations/.*'
+
+# Форматирует код под PEP8 c помощью black
+-   repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+    - id: black
+      language_version: python3.10
+      exclude: 'alembic/.*|migrations/.*'
