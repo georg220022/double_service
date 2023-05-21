@@ -39,6 +39,8 @@ class FileRepository:
             file_.export(f"{STORAGE_PATH}{name_file}", format=FORMAT_SONG)
         except PydubException:
             return JSONResponse(ServerMessages.ERROR_CONVERT, status_code=400)
+        except IndexError:
+            return JSONResponse(ServerMessages.ERROR_CONVERT, status_code=400)
         return name_file
 
     def validator_old_name(self, old_name_file) -> bool | JSONResponse:
