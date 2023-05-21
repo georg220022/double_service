@@ -1,4 +1,4 @@
-FROM python:3.10-slim as service_1_builder
+FROM python:3.10-alpine as service_1_builder
 
 ARG ENV_FILE
 
